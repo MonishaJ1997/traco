@@ -1,0 +1,236 @@
+{% extends "website/base.html" %}
+{% block title %}Home - TRACO{% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    /* Container with flex for left and right side */
+.container {
+  display: flex;
+max-height: 1000px;
+  
+}
+
+/* Left side image styling */
+.left-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0C0D0E;
+  padding: 20px;
+}
+
+.left-side img {
+  width: 450px;
+  height: 800px;
+  object-fit: contain;
+}
+
+/* Right side form container */
+.right-side {
+  flex: 1;
+  color: #9be20c; /* Neon green text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 50px;
+  position: relative;
+}
+
+/* Headings */
+.right-side h2 {
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Form labels and inputs */
+.right-side label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #9be20c;
+}
+
+.right-side input[type="email"],
+.right-side input[type="password"],
+.right-side input[type="text"],
+.right-side input[type="tel"]
+{
+  width: 400px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.right-side input::placeholder {
+  color: #999;
+}
+
+/* Forgot password link */
+#forgotPassword {
+  color:#9be20c;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  float: right;
+}
+
+#forgotPassword:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.right-side button {
+  margin-top: 30px;
+  width: 100%;
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.right-side button:hover {
+  background-color: #6b6b6b;
+}
+
+/* Bottom text links */
+.right-side p {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #9be20c;
+}
+
+.right-side p a {
+  color: #9be20c;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.right-side p a:hover {
+  text-decoration: underline;
+}
+</style>
+<div class="container">
+    <div class="left-side">
+      <!-- The golden bull image can be placed here -->
+
+      
+
+  
+             {% if image_asset %}
+          <img src="{{ image_asset.image.url }}" alt="{{ image_asset.title }}" >
+        {% else %}
+          <p>No image found</p>
+        {% endif %}
+      
+    </div>
+    <div class="right-side">
+      <div id="login-form">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <label for="email-login">E-mail Id</label>
+          <input type="email" id="email-login" name="email"  required />
+          <label for="password-login">Password</label>
+          <input type="password" id="password-login" name="password"  required />
+          <p style="text-align:right; margin-top: 6px;"><a href="#" id="forgotPassword">Forgot Your Password?</a></p>
+          <button type="submit">Login</button>
+        </form>
+        <p style="margin-top: 25px;">New Customer? <a href="#" id="show-register">Create Your Account</a></p>
+      </div>
+
+      <div id="register-form" style="display:none;height:80vw;">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label for="name">Name</label>
+            <input type="text" id="text" name="text" required>
+            <label for="tel">Mobile Number</label>
+            <input type="tel" id="tel" name="Mobile Number required">
+          <label for="email-register">E-mail Id</label>
+          <input type="email" id="email-register" name="email"  required />
+          <label for="password-register">Password</label>
+          <input type="password" id="password-register" name="password"  required minlength="6" />
+          <label for="confirm-password-register">Confirm Password</label>
+          <input type="password" id="confirm-password-register" name="confirmPassword"  required />
+          <button type="submit">Register</button>
+        </form>
+        <p style="margin-top: 25px;">Already have an account? <a href="#" id="show-login">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Toggle between login and register forms
+  document.getElementById('show-register').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+  });
+
+  document.getElementById('show-login').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('register-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
+  });
+
+  // Login form validation and redirect to home
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
+
+    // Simple validation for demo
+    if (email === '' || password === '') {
+      alert('Please fill in both fields.');
+      return;
+    }
+    // You can add more validation here or AJAX requests for real login
+    alert('Login successful! Redirecting to home page...');
+    window.location.href = 'home.html'; // Change this URL to actual home page
+  });
+
+  // Register form validation
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
+    const confirmPassword = e.target.confirmPassword.value.trim();
+
+    if (email === '' || password === '' || confirmPassword === '') {
+      alert('Please fill all the fields.');
+      return;
+    }
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+    alert('Registration successful! Redirecting to login page...');
+    // After registration redirect to login form
+    document.getElementById('register-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
+  });
+
+  // Forgot password (just alert for now)
+  document.getElementById('forgotPassword').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Password recovery is not implemented in this demo.');
+  });
+</script>
+
+{% endblock %}

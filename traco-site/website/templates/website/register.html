@@ -1,0 +1,63 @@
+{% extends "website/base.html" %}
+{% block title %}Home - TRACO{% endblock %}
+{% block content %}
+{% load static %}
+
+
+
+
+<style>
+  body, html {
+    margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif; background-color: #0f111b;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .container {
+    width: 400px; height: auto; background-color: #0f111b; color: #caff00; padding: 40px; box-shadow: 0 0 15px #000;
+  }
+  h2 {
+    text-align: center; margin-bottom: 20px; color: #caff00;
+  }
+  label {
+    display: block; margin: 12px 0 6px; font-weight: bold;
+  }
+  input[type="text"], input[type="password"] {
+    width: 100%; padding: 8px 10px; border: none; border-radius: 6px; font-size: 16px; outline: none;
+  }
+  button {
+    margin-top: 30px; padding: 12px 0; font-size: 18px; font-weight: bold; cursor: pointer; border: none;
+    border-radius: 6px; background-color: #555555; color: white;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #caff00; color: #000;
+  }
+  p {
+    margin-top: 18px;
+  }
+  a {
+    color: #caff00; cursor: pointer; text-decoration: underline;
+  }
+  .errorlist {
+    color: #ff4d4d; margin: 6px 0 0 0; list-style: none; padding: 0;
+  }
+</style>
+<div class="container">
+  <h2>Register</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <label for="id_username">Username</label>
+    {{ form.username }}
+    {{ form.username.errors }}
+    <label for="id_password1">Password</label>
+    {{ form.password1 }}
+    {{ form.password1.errors }}
+    <label for="id_password2">Confirm Password</label>
+    {{ form.password2 }}
+    {{ form.password2.errors }}
+    <button type="submit">Register</button>
+  </form>
+  <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</div>
+
+{% endblock %}

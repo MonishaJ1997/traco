@@ -1,0 +1,137 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Home - TRACO{% endblock %}
+
+{% block content %}
+
+
+
+{% if banner %}
+<section style="margin:10px auto; max-width:900px; border-radius:20px; overflow:hidden; position:relative;">
+  <img src="{{ banner.background.url }}" alt="Banner" style="width:100%; height:auto; display:block; border-radius:20px;">
+
+  <!-- Centered Text -->
+  <h1 style="position:absolute; top:30%; left:50%; transform:translate(-50%, -50%); 
+             color:black; font-size:48px; font-weight:700; text-align:center;">
+    {{ banner.title }} <span style="color:#9be20c;">{{ banner.highlight }}</span>
+  </h1>
+</section>
+{% endif %}
+
+
+
+
+
+
+
+
+
+<section style=" color:#fff; padding:60px 20px; text-align:center;">
+    <div class="container">
+      
+      <!-- Title -->
+      <h2 style="font-size:28px; font-weight:600; color:#ddd; margin-bottom:30px;">
+        Who  <span style="color:#aafc52;"> are We?</span>
+      </h2>
+  
+      <!-- First Paragraph -->
+      <p style="font-size:18px; line-height:1.8; max-width:800px; margin:0 auto 20px;">
+        With over 20 years of experience in the financial markets, 
+        we’re more than just a trading platform — we’re a trusted partner in your trading journey.
+      </p>
+  
+      <!-- Second Paragraph -->
+      <p style="font-size:18px; line-height:1.8; max-width:800px; margin:0 auto;">
+        Built on transparency, performance, and community, we’re here 
+        to help you trade smarter and grow stronger — every step of the way.
+      </p>
+  
+    </div>
+  </section>
+
+
+
+
+
+<section style= padding-left:100px;padding-right:100px;>
+  <div class="container" style="display:flex; align-items:center; justify-content:center; position:relative; max-width:1100px; margin:auto;">
+    
+    <!-- Left Side: Image -->
+    <div style="flex:1;">
+      {% if mission.image %}
+        <img src="{{ mission.image.url }}" alt="Mission Image" style="width:90%; ">
+      {% endif %}
+    </div>
+
+    <!-- Right Side: Overlapping Card -->
+    <div style="flex:1; margin-left:-100px; background:#fff;padding: 10px;  width:300px; box-shadow:0 6px 20px rgba(0,0,0,0.4); z-index:2;">
+      <h2 style="text-align:center; font-size:24px;  margin-bottom:20px; color: black;">
+        Our Mission
+      </h2>
+      <p style="text-align:center; font-size:18px; line-height:1.6; color:black;">
+        {{ mission.description }}
+      </p>
+    </div>
+
+  </div>
+
+  
+  
+</section>
+
+
+<!-- Vision Section -->
+<section style="padding-left:100px; padding-right:100px; margin-top:80px;">
+    <div class="container" style="display:flex; align-items:center; justify-content:center; position:relative; max-width:1100px; margin:auto;">
+      
+      <!-- Left Side: Overlapping Card -->
+      <div style="flex:1; margin-right:-100px; background:#fff; padding:10px; width:300px; box-shadow:0 6px 20px rgba(0,0,0,0.4); z-index:2;">
+
+
+        <h2 style="text-align:center; font-size:24px;  margin-bottom:20px;color:black">
+         Our Vision
+        </h2>
+        <p style="text-align:center; font-size:18px; line-height:1.6; color:black;">
+          {{ vision.description }}
+        </p>
+      </div>
+  
+      <!-- Right Side: Image -->
+      <div style="flex:1;">
+        {% if vision.image %}
+          <img src="{{ vision.image.url }}" alt="Vision Image" style="width:90%;">
+        {% endif %}
+      </div>
+  
+    </div>
+  </section>
+  
+
+  <section style="padding:60px 20px;">
+    <h2 style="text-align:center; font-size:32px; font-weight:700; color:white; margin-bottom:40px;">
+      Why Choose <span style="color:#9be20c;">TRACO</span>
+    </h2>
+  
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; max-width:1100px; margin:auto;">
+      {% for feature in features %}
+        <div style="background:linear-gradient(180deg, #f0f0f0, #e4e4e4); padding: 10px; border-radius:15px; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,0.2);">
+          
+          {% if feature.icon %}
+            <img src="{{ feature.icon.url }}" alt="{{ feature.title }}" style="width:90px; margin-bottom:20px;">
+          {% endif %}
+          
+          
+          
+          <p style="font-size:18px; line-height:1.6; color:black; font-weight: bold;">
+            {{ feature.description }}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  
+
+{% endblock %}
+
+

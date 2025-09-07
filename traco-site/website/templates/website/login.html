@@ -1,0 +1,76 @@
+{% extends "website/base.html" %}
+{% block title %}Home - TRACO{% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+  body, html {
+    margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif; background-color: #0f111b;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .container {
+    width: 900px; height: 500px; background-color: #0f111b; color: #caff00; display: flex; box-shadow: 0 0 15px #000;
+  }
+  .left-side {
+    width: 50%; display: flex; justify-content: center; align-items: center;
+  }
+  .left-side img {
+    max-width: 80%; max-height: 80%;
+  }
+  .right-side {
+    width: 50%; padding: 40px; color: #caff00; display: flex; flex-direction: column; justify-content: center;
+  }
+  h2 {
+    text-align: center; margin-bottom: 20px; color: #caff00;
+  }
+  label {
+    display: block; margin: 12px 0 6px; font-weight: bold;
+  }
+  input[type="email"], input[type="password"] {
+    width: 100%; padding: 8px 10px; border: none; border-radius: 6px; font-size: 16px; outline: none;
+  }
+  button {
+    margin-top: 30px; padding: 12px 0; font-size: 18px; font-weight: bold; cursor: pointer; border: none;
+    border-radius: 6px; background-color: #555555; color: white;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #caff00; color: #000;
+  }
+  p {
+    margin-top: 18px;
+  }
+  a {
+    color: #caff00; cursor: pointer; text-decoration: underline;
+  }
+  .errorlist {
+    color: #ff4d4d; margin: 6px 0 0 0; list-style: none; padding: 0;
+  }
+</style>
+
+<div class="container">
+  <div class="left-side">
+    {% if image %}
+      <img src="{{ image.image.url }}" alt="{{ image.title }}">
+    {% else %}
+      <p>No image available</p>
+    {% endif %}
+  </div>
+  <div class="right-side">
+    <h2>Login</h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <label for="id_username">E-mail Id</label>
+      {{ form.username }}
+      {{ form.username.errors }}
+      <label for="id_password">Password</label>
+      {{ form.password }}
+      {{ form.password.errors }}
+      <p style="text-align:right; margin-top: 6px;"><a href="#">Forgot Your Password?</a></p>
+      <button type="submit">Login</button>
+    </form>
+    <p style="margin-top: 25px;">New Customer? <a href="{% url 'register' %}">Create Your Account</a></p>
+  </div>
+</div>
+{% endblock %}

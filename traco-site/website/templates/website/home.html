@@ -1,0 +1,907 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Home - TRACO{% endblock %}
+
+{% block content %}
+  <style>
+    
+    .highlight-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 80px;
+      min-height: 400px;
+    }
+
+    .highlight-img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 40px #c6ff00); /* glowing effect */
+    }
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px;
+}
+
+.text-section {
+    max-width: 700px;
+    width: 90%;
+}
+
+.intro {
+    font-size: 1.4em;
+    text-align:center;
+    width: 580px;
+}
+
+.intro span {
+    
+    color: #acdb79;;
+}
+
+
+.tagline {
+    font-size: 1.5em;
+    margin-top: 30px;
+    text-align: left;
+    
+}
+
+.tagline span {
+    color: #9be20c;
+}
+
+
+
+.text-sectionss {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* allows individual control */
+    max-width: 100%;
+}
+
+
+
+.footerss {
+    text-align: center;
+    font-size: 1.2em;
+    color: #cccccc;
+    margin-top: -70px;
+    margin-left: 260px;
+}
+
+.image-section img {
+    max-width: 350px;
+    border-radius: 10px;
+}
+.feature-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* align bottoms */
+            margin: 80px auto;
+            max-width: 800px;
+            gap: 0;
+            box-shadow: 0px 6px 20px rgba(0,0,0,1);
+        margin-top: 10px;
+        }
+        .feature-card {
+            flex: 1;
+            padding: 40px 20px;
+            border-radius: 30px;
+            text-align: center;
+            background: linear-gradient(180deg, #3c3c3c, #1a1a1a);
+            margin: 0 -15px; /* overlap */
+            
+
+            z-index: 1;
+        }
+    
+
+.feature-card {
+    box-shadow: 0px 12px 30px rgba(250, 250, 250, 0.8);
+}
+
+.feature-card.highlight {
+    box-shadow: 0px 12px 30px rgba(200, 200, 200, 0.8);
+}
+
+        .feature-card.highlight {
+            background: #c6ff00;
+            color: black;
+            position: relative;
+         border-bottom-right-radius: 0px;
+         border-bottom-left-radius: 0px;
+            z-index: 2;
+           
+        }
+        .feature-card h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #adff2f;
+            margin-left: -180px;
+        }
+        .feature-card.highlight h2 {
+            color: #000;
+        }
+        .feature-card p {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+        .learn-more {
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: inherit;
+        }
+        .learn-more:hover {
+            text-decoration: underline;
+        }
+
+
+        .steps-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 100px auto;
+        }
+
+        /* SVG glowing zigzag line */
+        .zigzag-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 250px;
+            z-index: 0;
+        }
+        .zigzag-line path {
+            stroke: #adff2f;
+            stroke-width: 4;
+            fill: none;
+            filter: drop-shadow(0px 0px 10px #adff2f);
+        }
+
+        /* Steps */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+           
+        }
+
+        .step {
+            width: 22%;
+            text-align: center;
+            position: relative;
+        }
+
+        .step img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #0b0e0f;
+            padding: 15px;
+            border: 3px solid #adff2f;
+            box-shadow: 0 0 25px 5px #adff2f;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step h4 {
+            margin-top: 15px;
+            font-weight: bold;
+            
+        }
+
+        .step p {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 1.8;
+            color:#acdb79 ;
+        }
+
+        /* Zigzag positioning (up/down steps) */
+        .step:nth-child(1),
+        .step:nth-child(3) {
+            margin-top: 0;
+        }
+        .step:nth-child(2),
+        .step:nth-child(4) {
+            margin-top: 120px;
+        }
+
+
+        .community-section {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 0;
+        }
+        .community-section h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .community-section h2 span {
+            color: #adff2f; /* neon green highlight */
+        }
+        .community-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #c9ff8c; /* light green */
+        }
+
+
+
+
+
+.sidebar {
+  width: 260px;
+  background: #2a2f31;
+  padding: 26px;
+  min-height: 30vh;
+}
+.sidebar .avatar { width:84px; height:84px; border-radius:50%; object-fit:cover; }
+.sidebar a { display:block; color:#d3d6d8; padding:10px 0; text-decoration:none; }
+.sidebar a:hover { color:#fff; }
+
+.card-box {
+  background: #34383b;
+  border-radius: 14px;
+  padding: 20px;
+  display:flex;
+  flex-direction: column;
+}
+.card-box .small { color: #bfc3c6; }
+.highlight { color: #a0ff00; }
+.badge-green { background: #3ad63a; color: #0b0e0f; padding: 6px 10px; border-radius: 18px; }
+
+.canvas-wrap { flex: 1 1 auto; min-height: 300px; display:flex; }
+.canvas-wrap.sm { min-height: 100px; }
+canvas { width: 80% !important; height: 80% !important; display:block; }
+
+/* Right stacked charts */
+.chart-stack { gap: 1rem; }
+.chart-card { flex: 1 1 50%; display:flex; flex-direction: column; }
+.chart-card .canvas-wrap { flex:1 1 auto; }
+.chart-card h6, .chart-card .small { flex-shrink:0; }
+.border{
+  border: 10px solid rgb(233, 233, 107) !important;
+  border-radius: 20px;
+
+}
+.card img {
+    width: 100%;
+    height: 250px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensures images fill the card nicely */
+    transition: transform 0.3s ease;
+}
+
+
+
+.card {
+    border: none;
+    overflow: hidden;
+    border-radius: 10px;
+    
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 60px;
+  font-weight: bold;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.steps::before,
+.steps::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #c6ff00, #00ff88);
+  border-radius: 5px;
+  z-index: 0;
+}
+
+.steps::after {
+  top: calc(50% + 12px); /* second line for double effect */
+}
+
+.step {
+  width: 22%;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.step.top { margin-top: -80px; }
+.step.bottom { margin-top: 80px; }
+
+.icon-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  background: #111;
+  border: 3px solid #c6ff00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px #c6ff00;
+}
+
+.icon-wrapper img {
+  width: 60%;
+  height: auto;
+}
+/* Reset and basic */
+.trading-journey {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+  }
+  .circle-outline {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #9be20c; /* neon green */
+    border-radius: 50%;
+    margin-right: -15px; /* overlap circles */
+  }
+  .circle-filled {
+    width: 50px;
+    height: 50px;
+    background-color: #9be20c; /* neon green filled */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+  }
+  .arrow {
+    border: solid #0a0b0d; /* dark arrow */
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 8px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  .message {
+    color: white;
+  }
+
+/* Tablets */
+
+</style>
+
+  
+
+  <!-- Hero Section -->
+
+  {% load static %}
+
+  <div class="hero-container" style="
+  background-image: url('{{ bg_img.image.url }}');
+  background-size: cover;
+  background-position: center;
+  min-height: 500px;
+">
+  <!-- Your content here -->
+
+
+
+  <div class="hero-container" style="display:flex; align-items:center; justify-content:space-between; padding:30px; margin-left: 100px;">
+      
+      <!-- Left Side -->
+      <div class="hero-left" style="max-width:50%;">
+          <p style="font-weight:bold; color:#fff; font-size: 18px;">Keep Your Money Safe <span style="color: #9be20c;">!!!!</span></p>
+          <h1 style="font-size:36px; font-weight:bold; color:#9be20c; line-height:1.4; margin-left: 20px;">
+            Build Confidence<span style="color:white"> With</span> Every Single <span style="color:white"> Trade          </h1>
+          {% if hero.subheading %}
+          <h2 style="font-size:36px; font-weight:600; margin-top:10px;color:#9be20c;">{{ hero.subheading }}</h2>
+          {% endif %}
+  <hr style="color: white; height: 40px;">
+          <!-- Round Users -->
+          <div style="display:flex; align-items:center; margin-top:20px;">
+              {% for user in hero.users.all %}
+                  <img src="{{ user.image.url }}" alt="User" style="width:80px; height:80px; border-radius:50%; border:3px solid white; margin-right:-15px;">
+              {% endfor %}
+              <p style="margin-left:20px; font-size:24px;margin-left: 30px;"><b>500+</b><br>Realtime Users</p>
+          </div>
+      </div>
+  
+      <!-- Right Side -->
+      <div class="hero-right" style="max-width:500px;">
+          <img src="{{ hero.right_image.url }}" alt="Hero Image" style="width:90%;height:500px; border-radius:15px;">
+      </div>
+  
+  </div>
+
+
+  <div class="trading-journey" style="margin-left:250px;">
+    <div class="circle-outline"></div>
+    <div class="circle-filled">
+      <i class="arrow"></i>
+    </div>
+    <div class="message">Your Trading Journey Started Here....</div>
+  </div>
+
+
+
+
+
+  </div>
+
+
+  <div class="highlight-container"
+     style="background: radial-gradient(circle at center, #c6ff00 0%, #fff 60%, #000000 100%);">
+  <img src="{{ highlight.image.url }}" alt="Highlight" class="highlight-img">
+</div>
+
+
+
+
+ 
+    <div class="container" style="margin-top: -50px;">
+        <div class="text-section">
+            <p class="intro">20 years of industry expertise, we've empowered thousands of traders to take control of their financial future.
+              Our<span> platform combine proven experience with cutting-edge tools to help you trade smarter, faster, and more confidently.</span></p>
+            <div class="text-sectionss">
+            
+              <h1 class="tagline"><span>Your</span> Trusted<br><span> Partners of </span><span style="color: wheat; font-weight: bold;">TRACO</span></h1>
+            <p class="footerss">Built on trust. Driven by results.<br>Your partner in every market move.</p>
+        </div>
+        </div>
+        <div class="image-section">
+          {% if promo %}
+              <img src="{{ promo.image.url }}" alt="{{ promo.title }}">
+          {% else %}
+              <p>No image available.</p>
+          {% endif %}
+      </div>
+      
+    </div>
+
+
+    <div class="feature-container">
+      <!-- Card 1 -->
+      <div class="feature-card">
+          <h2>01.</h2>
+          <p class="fw-bold">Service For Any<br>Level of Expertise.</p>
+      </div>
+
+      <!-- Card 2 (highlighted center) -->
+      <div class="feature-card highlight">
+          <h2 style="margin-left: -200px;" >02.</h2>
+          <p class="fw-bold">Industries Best Practices</p>
+          <p>We follow the industry's best practices to ensure security, transparency, 
+          and performance at every level. From advanced risk management to ………</p>
+          <a href="#" class="learn-more" style="margin-left: -100px;">Learn More →</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="feature-card">
+          <h2>03.</h2>
+          <p class="fw-bold">Protected By<br>Insurance</p>
+      </div>
+  </div>
+   
+
+
+  
+<section class="how-it-works mb-2" style="text-align: center; ">
+    <h2 class="section-title" style="margin-bottom: 200px;">How it Works?</h2>
+  
+   
+  
+  
+  <div class="steps-wrapper">
+    <!-- Glowing Zigzag Line -->
+    <svg class="zigzag-line" viewBox="0 0 1200 300" preserveAspectRatio="none">
+        <path d="M 0 150 Q 150 0, 300 150 T 600 150 T 900 150 T 1200 150"/>
+    </svg>
+  
+    <div class="steps-container">
+      <!-- Step 1 -->
+      <div class="step">
+          <img src="{{ icons.0.icon.url }}" alt="Apply">
+          <h4>Apply</h4>
+          <p>Join thousands of traders who trust our platform every day.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+          <img src="{{ icons.1.icon.url }}" alt="Assessment">
+          <h4 style="margin-top: -300px;">Assessment</h4>
+          <p>Take our short assessment to discover your trading style, risk tolerance, and the tools that fit you best.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+          <img src="{{ icons.2.icon.url }}" alt="Get Funded">
+          <h4>Get Funded</h4>
+          <p>Trade with our capital and keep up to 90% of the profits.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step">
+          <img src="{{ icons.3.icon.url }}" alt="Trade & Grow">
+          <h4 style="margin-top: -300px;">Trade & Grow</h4>
+          <p>Whether you're just starting or scaling up, our tools, support, and funding help you grow with confidence.</p>
+      </div>
+  </div>
+</div>
+
+
+   
+  </section>
+  
+  
+    
+   
+      
+  
+     <!----
+  
+    <div class="container-fluid">
+      <div class="row g-0">
+       
+        <div class="col-auto">
+          <aside class="sidebar">
+            <div class="text-center mb-3">
+              {% if account.avatar %}
+                <img src="{{ account.avatar.url }}" class="avatar mb-3" alt="">
+              {% else %}
+                <img src="{% static 'images/user.png' %}" class="avatar mb-3" alt="">
+              {% endif %}
+              <h5 class="mb-0">Hello {{ account.user|default:"John" }}</h5>
+              <small class="text-muted d-block">{{ account.email|default:"john@example.com" }}</small>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.06)">
+            <a href="#">📊 Dashboard</a>
+            <a href="#">📡 Live Trading Room</a>
+            <a href="#">🛠 Trading Tools</a>
+            <a href="#">📈 FX Calculator</a>
+            <a href="#">📰 News Calendar</a>
+            <a href="#">⭐ Elite Trader Tools</a>
+          </aside>
+        </div>
+  
+        <div class="col">
+          <main class="p-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+              <h5 class="mb-0">
+                Account {{ account.id|default:"123456" }}
+                <span class="badge badge-green ms-2">Active</span>
+              </h5>
+              <h5 class="mb-0">Evaluation ${{ account.evaluation|default:15000 }}</h5>
+            </div>
+  
+            <!-- Top small cards (equal height) --
+            <div class="row g-3 mt-3 align-items-stretch">
+              <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card-box h-100">
+                  <div class="small text-muted">Balance</div>
+                  <div class="h4 highlight mb-0">${{ account.balance|default:15078 }}</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card-box h-100">
+                  <div class="small text-muted">Equality</div>
+                  <div class="h4 highlight mb-0">${{ account.equality|default:13485 }}</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card-box h-100">
+                  <div class="small text-muted">Max Risk Capital</div>
+                  <div class="h4 highlight mb-0">${{ account.risk_capital|default:178 }}</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card-box h-100">
+                  <div class="small text-muted">Drawdown Limit</div>
+                  <div class="h4 highlight mb-0">${{ account.drawdown_limit|default:15078 }}</div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Main chart row: left big chart, right stacked widgets -
+            <!-- Chart + Right widgets --
+            <div class="row g-3 mt-3 align-items-stretch">
+              <!-- Left: Account Balance chart (8/12) --
+              <div class="col-12 col-xl-8">
+                <div class="card-box h-100">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h6 class="mb-0">Account Balance</h6>
+                    <div class="text-muted">Year</div>
+                  </div>
+                  <div style="flex:1 1 auto; min-height:220px;">
+                    <canvas id="lineChart" height="220"></canvas>
+                  </div>
+                </div>
+              </div>--
+  
+              <!-- Right: Drawdown + Goals stacked (4/12) --
+              <div class="col-12 col-xl-4 d-flex flex-column gap-3 h-100">
+                <div class="card-box flex-fill">
+                  <h6 class="mb-3 text-center">Drawdown</h6>
+                  <div class="d-flex justify-content-center">
+                    <canvas id="ddChart" width="160" height="160"></canvas>
+                  </div>
+                  <div class="small mt-2 text-center">Of Your Balance Left & Equality Left</div>
+                </div>
+  
+                <div class="card-box flex-fill">
+                  <h6 class="mb-3 text-center">Goals</h6>
+                  <div class="d-flex justify-content-center">
+                    <canvas id="goalChart" width="160" height="160"></canvas>
+                  </div>
+                  <div class="small mt-2 text-center">Progress vs Target</div>
+                </div>
+              </div>
+            </div>
+<!-- Chart + Right widgets -->
+
+
+ <div class="border">
+<div class="container-fluid">
+  <div class="row g-0">
+    <!-- Sidebar -->
+    <div class="col-auto">
+      <aside class="sidebar mb-0">
+        <div class="text-center ">
+          {% if account and account.avatar %}
+            <img src="{{ account.avatar.url }}" class="avatar mb-3" alt="">
+          {% else %}
+            <img src="{% static 'images/user.png' %}" class="avatar mb-3" alt="">
+          {% endif %}
+          <h5 class="mb-0"> {{ account.user|default:"John" }}</h5>
+          <small class="text d-block">{{ account.email|default:"john@example.com" }}</small>
+        </div>
+        <hr style="border-color: rgba(255,255,255,0.06)">
+        <a href="#">📊 Dashboard</a>
+        <a href="#">📡 Live Trading Room</a>
+        <a href="#">🛠 Trading Tools</a>
+        <a href="#">📈 FX Calculator</a>
+        <a href="#">📰 News Calendar</a>
+        <a href="#">⭐ Elite Trader Tools</a>
+      </aside>
+    </div>
+
+    <!-- Main content -->
+    <div class="col">
+      <main class="p-4">
+        <!-- Top bar -->
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <h5 class="mb-0">
+            Account {{ account.id|default:"123456" }}
+            <span class="badge badge-green ms-2">Active</span>
+          </h5>
+          <h5 class="mb-0">Evaluation ${{ account.evaluation|default:15000 }}</h5>
+        </div>
+
+        <!-- Small cards -->
+        <div class="row g-3">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card-box h-100">
+              <div class="small text">Balance</div>
+              <div class="h4 highlight mb-0">${{ account.balance|default:15078 }}</div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card-box h-100">
+              <div class="small text">Equality</div>
+              <div class="h4 highlight mb-0">${{ account.equality|default:13485 }}</div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card-box h-100">
+              <div class="small text">Max Risk Capital</div>
+              <div class="h4 highlight mb-0">${{ account.risk_capital|default:178 }}</div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card-box h-100">
+              <div class="small text">Drawdown Limit</div>
+              <div class="h4 highlight mb-0">${{ account.drawdown_limit|default:15078 }}</div>
+            </div>
+          </div>
+
+
+          <div class="col-12 col-sm-8 d-flex">
+            <div class="card-box flex-fill">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h6 class="mb-0">Account Balance</h6>
+                <div class="text-muted">Year</div>
+              </div>
+              <div class="canvas-wrap">
+                <canvas id="lineChart"></canvas>
+              </div>
+            </div>
+          </div>
+       
+          <div class="col-12 col-sm-4 d-flex flex-column chart-stack">
+            <div class="card-box chart-card">
+              <h6 class="mb-3 text-center">Drawdown</h6>
+              <div class="canvas-wrap sm"><canvas id="ddChart"></canvas></div>
+              <div class="small mt-2 text-center">Of Your Balance Left & Equality Left</div>
+            </div>
+            <div class="card-box chart-card">
+              <h6 class="mb-3 text-center">Goals</h6>
+              <div class="canvas-wrap sm"><canvas id="goalChart"></canvas></div>
+              <div class="small mt-2 text-center">Progress vs Target</div>
+            </div>
+          </div>
+
+        </div>
+      
+
+      
+      </main>
+    </div>
+  </div>
+</div>
+ </div>
+{{ chart_json|json_script:"chart-json" }}
+
+
+<!----
+          </main>
+        </div>
+      </div>
+    </div>-->
+  
+
+    {# Pass Django chart data safely #}
+    {{ chart_json|json_script:"chart-json" }}
+  
+    <script>
+      const chartData = JSON.parse(document.getElementById('chart-json').textContent || '{}');
+  
+      // Simple fallback data if chart_json missing
+      const labels = chartData.labels || ['Jun','Jul','Aug','Sep','Oct'];
+      const balance = chartData.balance || [40,60,20,80,55];
+      const equality = chartData.equality || [20,35,75,50,90];
+  // Line Chart
+const lc = document.getElementById('lineChart').getContext('2d');
+new Chart(lc, {
+  type: 'line',
+  data: {
+    labels: chartData.labels,
+    datasets: [
+      {
+        label: 'Balance',
+        data: chartData.balance,
+        borderColor: 'rgb(160, 255, 0)',
+        backgroundColor: 'rgba(160,255,0,0.15)',
+        tension: 0.4,
+      },
+      {
+        label: 'Equality',
+        data: chartData.equality,
+        borderColor: 'rgb(255, 80, 80)',
+        backgroundColor: 'rgba(255,80,80,0.15)',
+        tension: 0.4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#fff' } } },
+    scales: {
+      x: { ticks: { color:'#c9c9c9' }, grid: { color:'rgba(255,255,255,0.08)' } },
+      y: { ticks: { color:'#c9c9c9' }, grid: { color:'rgba(255,255,255,0.08)' } },
+    }
+  }
+});
+
+// Doughnut: Drawdown
+new Chart(document.getElementById('ddChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Used', 'Left'],
+    datasets: [{
+      data: [chartData.drawdown_used_pct, chartData.drawdown_left_pct],
+      backgroundColor: ['rgb(255,80,80)', 'rgb(160,255,0)'],
+      borderWidth: 0
+    }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { labels: { color:'#fff' } } } }
+});
+
+// Doughnut: Goals
+new Chart(document.getElementById('goalChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Completed', 'Pending'],
+    datasets: [{
+      data: [chartData.goal_completed_pct, chartData.goal_pending_pct],
+      backgroundColor: ['rgb(255,235,59)', 'rgb(100,100,100)'],
+      borderWidth: 0
+    }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { labels: { color:'#fff' } } } }
+});
+
+  </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+
+   <div style="background:#0b0e0f; color:white; text-align:center; padding:50px 20px;">
+    <h2 style="font-size:28px; font-weight:bold;">
+        Build a <span style="color:#9be20c;">Strong</span> Community
+    </h2>
+    <p style="font-size:22px; margin-top:15px; line-height:1.6;color:#c5eb8a; max-width:500px; margin-left:auto; margin-right:auto;">
+        Join a global network of passionate traders. Share strategies, learn from experts, 
+        and grow together in a supportive, success-driven environment.
+    </p>
+</div>
+<!---
+<div class="container my-5">
+  <div class="row g-4">
+    {% for card in cards %}
+    <div class="col-12 col-md-4">
+        <div class="cards">
+          <img src="{{ card.image.url }}" alt="Card Image">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>-
+<div class="container my-5">
+    <div class="row g-4">
+      {% for card in cards %}
+        <div class="col-12 col-md-4">
+          <div class="cards">
+            <img src="{{ card.image.url }}" alt="Card Image">
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>-->
+  
+  <div class="container" style="max-width:1200px; margin-top: -100px;">
+    <div class="row g-4">
+        {% for card in cards %}
+            {% if forloop.counter <= 3 %}
+                <!-- First row: 3 images -->
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <img src="{{ card.image.url }}" alt="Card Image" class="img-fluid rounded">
+                    </div>
+                </div>
+            {% elif forloop.counter <= 5 %}
+                <!-- Second row: 2 images -->
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <img src="{{ card.image.url }}" alt="Card Image" class="img-fluid rounded">
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+  
+
+  {% endblock %}

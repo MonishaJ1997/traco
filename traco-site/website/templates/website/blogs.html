@@ -1,0 +1,316 @@
+{% extends "website/base.html" %}
+{% block title %}Home - TRACO{% endblock %}
+{% block content %}
+{% load static %}
+{% for section in sections_knowledge %}
+
+<style>
+  @media (max-width: 992px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Mobile (1 card) */
+  @media (max-width: 576px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .more-button {
+      color: white;
+      border: 1px solid #d6e685; /* Light green border */
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-family: Arial, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: max-content;
+    }
+
+    .more-button svg {
+      fill: #d6e685; /* Light green arrow */
+      width: 12px;
+      height: 12px;
+      stroke-width: 1;
+      stroke: none;
+    }
+</style>
+<section  style=" padding:60px 20px;">
+  <div style="display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:auto; flex-wrap:wrap;">
+    
+    <!-- Left Text -->
+    <div style="flex:1; min-width:300px; padding:20px; color:white; text-align: center;">
+      <h2 style="font-size:32px; font-weight:600; ">
+        {{ section.title }}
+      </h2>
+      <h2 style="font-size:32px; font-weight:700; color:#9be20c; margin-bottom:20px; margin-top: 0;">
+        {{ section.highlight }}
+      </h2>
+      <p style="font-size:22px; line-height:1.8; text-align:center;">
+        Whether you’re a new investor or a market expert, we’ve got something for everyone at the 
+        <span style="color:#9be20c; font-weight:600;">TRACO</span> blog.
+      </p>
+    </div>
+
+    <!-- Right Image -->
+    <div style="flex:1; min-width:300px; padding:20px; text-align:center; position:relative;">
+      <div style="display:inline-block; border:2px solid #9be20c; border-radius:50%; padding:15px; position:relative;">
+        <img src="{{ section.main_image.url }}" alt="Knowledge" 
+             style="width:280px; height:350px; border-radius:50%; object-fit:cover; background:white;">
+        
+        <!-- Top Star -->
+        {% if section.star_icon_top %}
+        <div style="position:absolute; top:20px; right:0px; width:40px; height:40px; border-radius:50%; background:#2a1bf3; display:flex; align-items:center; justify-content:center;">
+          <img src="{{ section.star_icon_top.url }}" alt="Star" style="width:20px; height:20px;">
+        </div>
+        {% endif %}
+        
+        <!-- Bottom Star -->
+        {% if section.star_icon_bottom %}
+        <div style="position:absolute; bottom:20px; left:10px; width:40px; height:40px; border-radius:50%; background:#2a1bf3; display:flex; align-items:center; justify-content:center;">
+          <img src="{{ section.star_icon_bottom.url }}" alt="Star" style="width:20px; height:20px;">
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endfor %}
+
+
+
+
+
+<div class="container mt-4">
+
+  <!-- Tabs -->
+  <div class="tab-container" style="display:flex; justify-content:center; gap:8px; border:1px solid #c6ff00; border-radius:25px; padding:5px; background:#0b0e0f;">
+    <button class="tab-btn" data-tab="stocks" type="button"
+      style="border:none; background:transparent; color:#c6ff00; font-size:22px; padding:13px 25px; border-radius:15px; cursor:pointer;">
+      Stocks
+    </button>
+
+    <button class="tab-btn" data-tab="mutualfunds" type="button"
+      style="border:none; background:transparent; color:#c6ff00; font-size:22px; padding:13px 25px; border-radius:15px; cursor:pointer;">
+      Mutual Funds
+    </button>
+
+    <button class="tab-btn" data-tab="personalfinance" type="button"
+      style="border:none; background:transparent; color:#c6ff00; font-size:22px; padding:13px 25px; border-radius:15px; cursor:pointer;">
+      Personal Finance
+    </button>
+
+    <button class="tab-btn" data-tab="futures" type="button"
+      style="border:none; background:transparent; color:#c6ff00; font-size:22px; padding:13px 25px; border-radius:15px; cursor:pointer;">
+      Futures & Options
+    </button>
+  </div>
+
+  <!-- Stocks Tab -->
+  <div id="stocks" class="tab-pane" style="display:none; background:black; padding:40px; border-radius:10px;">
+    <div class="card-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;">
+      {% for card in stocks.cards.all|slice:":3" %}
+        <div class="card shadow-sm" style="border-radius:20px; overflow:hidden; background:#fff; height:100%;">
+          <img src="{{ card.image.url }}" alt="{{ card.title }}" style="width:100%; height:220px; object-fit:cover;">
+          <div class="card-body" style="padding:15px; text-align:center;">
+            <h5 style="font-weight:700; margin-bottom:8px;">{{ card.title }}</h5>
+            <p style="color:#6c757d; font-size:14px; margin-bottom:5px;">
+              {{ card.read_time }} · {{ card.date|date:"d M Y" }}
+            </p>
+            {% if card.subtitle %}
+              <p style="font-weight:600; font-size:19px; margin-bottom:6px;">{{ card.subtitle }}</p>
+            {% endif %}
+            <p style="font-size:18px; color:#333;">{{ card.description|truncatewords:15 }}</p>
+          </div>
+        </div>
+      {% empty %}
+        <p style="color:white; text-align:center;">No cards available for Stocks</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Mutual Funds Tab -->
+  <div id="mutualfunds" class="tab-pane" style="display:none; background:black; padding:40px; border-radius:10px;">
+    <div class="card-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;">
+      {% for card in mutualfunds.cards.all|slice:":3" %}
+        <div class="card shadow-sm" style="border-radius:20px; overflow:hidden; background:#fff; height:100%;">
+          <img src="{{ card.image.url }}" alt="{{ card.title }}" style="width:100%; height:220px; object-fit:cover;">
+          <div class="card-body" style="padding:15px; text-align:center;">
+            <h5 style="font-weight:700; margin-bottom:8px;">{{ card.title }}</h5>
+            <p style="color:#6c757d; font-size:14px; margin-bottom:5px;">
+              {{ card.read_time }} · {{ card.date|date:"d M Y" }}
+            </p>
+            {% if card.subtitle %}
+              <p style="font-weight:600; font-size:19px; margin-bottom:6px;">{{ card.subtitle }}</p>
+            {% endif %}
+            <p style="font-size:18px; color:#333;">{{ card.description|truncatewords:15 }}</p>
+          </div>
+        </div>
+      {% empty %}
+        <p style="color:white; text-align:center;">No cards available for Mutual Funds</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Personal Finance Tab -->
+  <div id="personalfinance" class="tab-pane" style="display:none; background:black; padding:40px; border-radius:10px;">
+    <div class="card-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;">
+      {% for card in personalfinance.cards.all|slice:":3" %}
+        <div class="card shadow-sm" style="border-radius:20px; overflow:hidden; background:#fff; height:100%;">
+          <img src="{{ card.image.url }}" alt="{{ card.title }}" style="width:100%; height:220px; object-fit:cover;">
+          <div class="card-body" style="padding:15px; text-align:center;">
+            <h5 style="font-weight:700; margin-bottom:8px;">{{ card.title }}</h5>
+            <p style="color:#6c757d; font-size:14px; margin-bottom:5px;">
+              {{ card.read_time }} · {{ card.date|date:"d M Y" }}
+            </p>
+            {% if card.subtitle %}
+              <p style="font-weight:600; font-size:19px; margin-bottom:6px;">{{ card.subtitle }}</p>
+            {% endif %}
+            <p style="font-size:18px; color:#333;">{{ card.description|truncatewords:15 }}</p>
+          </div>
+        </div>
+      {% empty %}
+        <p style="color:white; text-align:center;">No cards available for Personal Finance</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Futures Tab -->
+  <div id="futures" class="tab-pane" style="display:none; background:black; padding:40px; border-radius:10px;">
+    <div class="card-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;">
+      {% for card in futures.cards.all|slice:":3" %}
+        <div class="card shadow-sm" style="border-radius:20px; overflow:hidden; background:#fff; height:100%;">
+          <img src="{{ card.image.url }}" alt="{{ card.title }}" style="width:100%; height:220px; object-fit:cover;">
+          <div class="card-body" style="padding:15px; text-align:center;">
+            <h5 style="font-weight:700; margin-bottom:8px;">{{ card.title }}</h5>
+            <p style="color:#6c757d; font-size:14px; margin-bottom:5px;">
+              {{ card.read_time }} · {{ card.date|date:"d M Y" }}
+            </p>
+            {% if card.subtitle %}
+              <p style="font-weight:600; font-size:19px; margin-bottom:6px;">{{ card.subtitle }}</p>
+            {% endif %}
+            <p style="font-size:18px; color:#333;">{{ card.description|truncatewords:15 }}</p>
+          </div>
+        </div>
+      {% empty %}
+        <p style="color:white; text-align:center;">No cards available for Futures</p>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+<!-- JS: showTab + default open -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  function showTab(tabId, btn) {
+    // hide all panes
+    document.querySelectorAll(".tab-pane").forEach(pane => {
+      pane.style.display = "none";
+      pane.classList.remove("active");
+    });
+
+    // deactivate all buttons
+    document.querySelectorAll(".tab-btn").forEach(b => {
+      b.classList.remove("active");
+      b.style.boxShadow = "none";
+    });
+
+    // find pane and show it
+    var pane = document.getElementById(tabId);
+    if (!pane) return;
+    pane.style.display = "block";
+    pane.classList.add("active");
+
+    // find button if not provided
+    if (!btn) btn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+    if (btn) {
+      btn.classList.add("active");
+      // example visual cue: small inset shadow for active
+      btn.style.boxShadow = "inset 0 0 0 2px rgba(198,255,0,0.12)";
+    }
+  }
+
+  // wire up clicks
+  document.querySelectorAll(".tab-btn").forEach(b => {
+    b.addEventListener("click", function () {
+      showTab(this.dataset.tab, this);
+    });
+  });
+
+  // DEFAULT: open Mutual Funds on page load
+  showTab("stocks", document.querySelector('.tab-btn[data-tab="stocks"]'));
+});
+</script>
+
+<style>
+/* small helper to style active button more strongly if you want */
+.tab-btn.active {
+  /* you can adjust background or color */
+  background: whitesmoke !important;
+  color: black !important;
+}
+</style>
+
+
+<div class="btn" style="display:flex;justify-content: center; align-items: center;">
+<button class="more-button">
+  More
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</button>
+</div>
+<!-- JS for Tab Switching -
+<script>
+    function showTab(tabId, element) {
+    document.querySelectorAll(".tab-pane").forEach(pane => pane.style.display = "none");
+    document.getElementById(tabId).style.display = "block";
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.classList.remove("active");
+      btn.style.background = "transparent";
+      btn.style.color = "#c6ff00";
+    });
+    element.classList.add("active");
+    element.style.background = "#e0e0e0";
+    element.style.color = "black";
+  }
+</script-->
+
+<script>
+  function showTab(tabId, btn) {
+    // Hide all tab panes
+    document.querySelectorAll(".tab-pane").forEach(pane => {
+      pane.style.display = "none";
+      pane.classList.remove("active");
+    });
+  
+    // Remove active state from all buttons
+    document.querySelectorAll(".tab-btn").forEach(button => {
+      button.classList.remove("active");
+    });
+  
+    // Show selected tab
+    document.getElementById(tabId).style.display = "block";
+    document.getElementById(tabId).classList.add("active");
+  
+    // Highlight active button
+    btn.classList.add("active");
+  }
+  </script>
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

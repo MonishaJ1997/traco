@@ -1,0 +1,328 @@
+
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>{% block title %}TRACO{% endblock %}</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  {% block head %}{% endblock %}
+
+  <style>
+    body {
+      background: #050708;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+    }
+
+    .navbar .nav-link.active {
+      color: grey !important;
+      font-weight: bold;
+    }
+
+    .navbar .nav-link:hover {
+      color: #b8ff00 !important;
+    }
+
+
+.footer-container {
+ 
+  color: white;
+ 
+  padding: 20px 30px;
+  border: 1px solid white;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+/* Each column occupies equal width, 5 columns total */
+.footer-col {
+  flex: 0.5 0.5 20%;
+  min-width: 140px;
+}
+.footer-cols{
+  flex: 1 1 20%
+}
+/* Logo column with icons below logo */
+.logo-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.logo-highlight {
+  font-weight: 900;
+  font-size: 36px;
+  color: #ccff00;
+}
+
+.footer-get-in-touch p {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Social icons block below logo */
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #bbff00;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #ccff00;
+}
+
+.fb-icon {
+  background-color: #bbff00;
+  mask: url('https://cdn-icons-png.flaticon.com/512/733/733547.png') no-repeat center / contain;
+  -webkit-mask: url('https://cdn-icons-png.flaticon.com/512/733/733547.png') no-repeat center / contain;
+}
+
+.x-icon {
+  background-color: #bbff00;
+  mask: url('https://cdn-icons-png.flaticon.com/512/733/733579.png') no-repeat center / contain;
+  -webkit-mask: url('https://cdn-icons-png.flaticon.com/512/733/733579.png') no-repeat center / contain;
+}
+
+.insta-icon {
+  background-color: #bbff00;
+  mask: url('https://cdn-icons-png.flaticon.com/512/174/174855.png') no-repeat center / contain;
+  -webkit-mask: url('https://cdn-icons-png.flaticon.com/512/174/174855.png') no-repeat center / contain;
+}
+
+.footer-nav ul,
+.footer-info ul,
+.footer-resources ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+}
+
+.footer-nav li,
+.footer-info li,
+.footer-resources li {
+  margin-bottom: 8px;
+  
+}
+
+.footer-info li:first-child,
+.footer-resources li:first-child {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-newsletter-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.footer-newsletter b {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+  font-size: 18px;
+}
+
+.footer-newsletter form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.footer-newsletter input[type="email"] {
+  flex: 1;
+  padding: 7px 8px;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  font-size: 14px;
+}
+
+.footer-newsletter button {
+  background-color: #bbff00;
+  border: none;
+  color: #000;
+  padding: 7px 15px;
+  font-weight: bold;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+  background-color: #ccff00;
+}
+
+.newsletter-info {
+  font-size: 12px;
+  color: white;
+  line-height: 1.3;
+  max-width: 280px;
+}
+
+@media (max-width: 860px) {
+  .footer-content {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-col {
+    flex: 1 1 100%;
+    min-width: auto;
+  }
+  .footer-newsletter .newsletter-info,
+  .newsletter-info {
+    max-width: 100%;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  
+  <nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        {% if site_logo %}
+          <img src="{{ site_logo.image.url }}" alt="{{ site_logo.alt_text }}" height="70">
+        {% else %}
+          <span class="text-success fw-bold">IT IRAO</span>
+        {% endif %}
+      </a>
+
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Nav Links + User Icon -->
+      <div class="collapse navbar-collapse justify-content-center fs-4"   id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item">
+            <a class="nav-link text-white ms-1 mx-3" href="{% url 'website:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white mx-3" href="{% url 'website:about' %}">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white mx-3" href="{% url 'website:blogs' %}">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white mx-3" href="{% url 'website:partner' %}">Become a Partner</a>
+          </li>
+          <li class="nav-item ms-3">
+            <a class="nav-link" href="{% url 'website:profile' %}">
+              <i class="bi bi-person-circle text-white fs-4"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🔄 Page Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+ 
+
+  <footer class="footer-container">
+    <div class="footer-content">
+      <div class="footer-col logo-col">
+        <div class="footer-logo">
+          <img src="{{ site_logo.image.url }}" alt="{{ site_logo.alt_text }}" height="70">
+        </div>
+        <div class="footer-get-in-touch">
+          <p>Get in Touch</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon fb-icon" aria-label="Facebook"></a>
+            <a href="#" class="social-icon x-icon" aria-label="X"></a>
+            <a href="#" class="social-icon insta-icon" aria-label="Instagram"></a>
+          </div>
+        </div>
+      </div>
+  
+      <nav class="footer-col footer-nav">
+        <ul>
+          <li>Home</li>
+          <li>Trade Investor</li>
+          <li>About Us</li>
+          <li>Blogs</li>
+          <li>Become a Partner</li>
+        </ul>
+      </nav>
+  
+      <nav class="footer-col footer-info">
+        <ul>
+          <li><b>Information</b></li>
+          <li>Market Explore</li>
+          <li>Ready Token</li>
+          <li>Main Option</li>
+          <li>File Checking</li>
+        </ul>
+      </nav>
+  
+      <nav class="footer-col footer-resources">
+        <ul>
+          <li><b>Resources</b></li>
+          <li>FAQ's</li>
+          <li>Blogs</li>
+          <li>Doc</li>
+          <li>Press Kit</li>
+        </ul>
+      </nav>
+  
+      <div class="footer-cols footer-newsletter-col">
+        <div class="footer-newsletter">
+          <b>Newsletter</b>
+          <form>
+            <input type="email" placeholder="Enter Your Email" />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p class="newsletter-info fs-6">
+            NFT’s are Transforming the World Commerce is a Transacted.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
